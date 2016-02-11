@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/templates/clearTemplate2.xhtml">
+
+        <ui:define name="tituloPagina">Prod</ui:define>
+
+        <ui:define name="autor">DM</ui:define>
+        <ui:define name="contenido">
+            <h:head>
+                <title>Login con Permisos</title>
+                <link rel="stylesheet" href="resources/css/style.css" />
+                <style type="text/css">
+                    html {
+                        height: 100%;
+                    }
+                    body {
+                        height: 80%;
+                    }
+                </style>
+            </h:head>
+            <h:form id="frmMenu">
+                <p:menubar autoDisplay="false">
+                    <p:menuitem value="Inicio" url="inicio.xhtml" icon="principal" />  
+                    <p:submenu rendered="#{loginBean.usuario.perfil.gest}" label="Gestion" icon="mantenimiento">  
+                        <p:menuitem rendered="#{loginBean.usuario.perfil.gestProd}" value="Producto" url="ProductoC.xhtml" icon="cliente"/> 
+                        <p:menuitem rendered="#{loginBean.usuario.perfil.gestPers}" value="Personal" url="Personal.xhtml" icon="cliente"/>  
+ <p:menuitem rendered="#{loginBean.usuario.perfil.gestCli}" value="Clientes" url="Cliente.xhtml" icon="cliente"/> 
+                    </p:submenu>
+
+                    <p:submenu rendered="#{loginBean.usuario.perfil.venta}" label="Ventas" icon="reporte">  
+                        <p:menuitem rendered="#{loginBean.usuario.perfil.ven}" value="Factura" url="index.xhtml" icon="reporte"/>
+
+                    </p:submenu>  
+
+                    <p:submenu rendered="#{loginBean.usuario.perfil.conf}" label="Configuracion" icon="configuracion">  
+                        <p:menuitem rendered="#{loginBean.usuario.perfil.confPerf}" value="Perfiles" url="perfil.xhtml" icon="perfil"/>
+                        <p:menuitem rendered="#{loginBean.usuario.perfil.confUsu}" value="Usuarios" url="usuario.xhtml" icon="usuarios"/>
+                    </p:submenu>  
+
+                    <p:menuitem value="Salir" url="login.xhtml" icon="salir" />  
+                </p:menubar>
+            </h:form>
+
+
+            <h:form id="frmprincipal">
+
+                <p:panel id="panel2">
+                    <p:panelGrid id="panel" columns="2">
+
+                        <p:outputLabel value="ID Personal" for="idPersonal" />
+                        <p:inputText id="idPersonal" value="#{mbPersonal.selected.perId}" />
+                        <p:outputLabel value="Cédula" for="cedula" />
+                        <p:inputText id="cedula" value="#{mbPersonal.personal.perCi}" title="#{bundle.CreateTproductoTitle_codigoBarras}"  requiredMessage="#{bundle.CreateTproductoRequiredMessage_codigoBarras}"/>
+                        <p:outputLabel value="Nombre" for="nombre" />
+                        <p:inputText id="nombre" value="#{mbPersonal.personal.perNombre}" />
+                        <p:outputLabel value="Apellido" for="apellido" />
+                        <p:inputText id="apellido" value="#{mbPersonal.personal.perApellido}" title="#{bundle.CreateTproductoTitle_precioVentaUnitario}"  requiredMessage="#{bundle.CreateTproductoRequiredMessage_precioVentaUnitario}"/>
+                        <p:outputLabel value="Direccion" for="direccion" />
+                        <p:inputText id="direccion" value="#{mbPersonal.personal.perDireccion}" />
+                        <p:outputLabel value="Telefono" for="telefono" />
+                        <p:inputText id="telefono" value="#{mbPersonal.personal.perTelefono}" />
+                        <p:outputLabel value="Email" for="email" />
+                        <p:inputText id="email" value="#{mbPersonal.personal.perEmail}" />
+             </p:panelGrid>          
+<p:panelGrid id="panel4" columns="3"> 
+                        <p:commandButton disabled="#{loginBean.usuario.perfil.opcion.ins}" value="Ingresar" ajax="false" actionListener="#{mbPersonal.guardarPersonal()}"/>
+                        <p:commandButton disabled="#{loginBean.usuario.perfil.opcion.upd}" value="Modificar" ajax="false" actionListener="#{mbPersonal.actualizarPersonal()}"/>
+                        <p:commandButton disabled="#{loginBean.usuario.perfil.opcion.del}" value="Eliminar" ajax="false" actionListener="#{mbPersonal.eliminarPersonal()}"/>
+                    </p:panelGrid>
+                </p:panel>
+                <p:panel id="panel3">
+                    <p:panelGrid id="paneltabla" columns="1" >
+
+
+
+
+                        <p:dataTable  id="tabla" value="#{mbPersonal.allPer}" var="item" style="font-size: 10px;width: 1100px;" scrollable="true" scrollHeight="100">
+
+                            <p:column headerText="ID">
+                                <h:outputText value="#{item.perId}"/>
+                            </p:column>
+                            <p:column headerText="CEDULA">
+                                <h:outputText value="#{item.perCi}"/>
+                            </p:column>
+                            <p:column headerText="NOMBRE" filterBy="nombre">
+                                <h:outputText value="#{item.perNombre}"/>
+                            </p:column>
+                            <p:column headerText="APELLIDO">
+                                <h:outputText value="#{item.perApellido}"/>
+                            </p:column>
+                            <p:column headerText="DIRECCION">
+                                <h:outputText value="#{item.perDireccion}"/>
+                            </p:column>
+                            <p:column headerText="TELEFONO">
+                                <h:outputText value="#{item.perTelefono}"/>
+                            </p:column>
+                            <p:column headerText="EMAIL">
+                                <h:outputText value="#{item.perEmail}"/>
+                            </p:column>
+                            
+                             <p:column>        
+                                <p:commandButton process="@this" value= "SELECCIONAR" update=":frmprincipal:panel,tabla">
+                                    <f:setPropertyActionListener target="#{mbPersonal.personal}" value="#{item}"></f:setPropertyActionListener>
+                                </p:commandButton>
+                            </p:column>
+
+                            <p:column>
+                                <p:commandButton disabled="#{loginBean.usuario.perfil.opcion.del}"  process="@this" value= "ELIMINAR" update=":frmprincipal:panel,tabla" action="#{mbPersonal.eliminarPersonal()}">
+                                    <f:setPropertyActionListener target="#{mbPersonal.personal}" value="#{item}"></f:setPropertyActionListener>
+                                </p:commandButton>
+                            </p:column>
+
+                            <f:facet name="footer">
+                                <h:outputText value="fin"/>
+                            </f:facet>
+                            
+                        </p:dataTable>
+                    </p:panelGrid>
+                </p:panel>           
+            </h:form>
+        </ui:define>
+
+    </ui:composition>    
+</html>

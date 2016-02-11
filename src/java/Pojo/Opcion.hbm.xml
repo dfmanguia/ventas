@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated feb 6, 2016 11:16:58 a.m. by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="Pojo.Opcion" table="opcion" catalog="vent" optimistic-lock="version">
+        <id name="idOp" type="java.lang.Integer">
+            <column name="id_op" />
+            <generator class="identity" />
+        </id>
+        <property name="ins" type="java.lang.Boolean">
+            <column name="ins" />
+        </property>
+        <property name="upd" type="java.lang.Boolean">
+            <column name="upd" />
+        </property>
+        <property name="del" type="java.lang.Boolean">
+            <column name="del" />
+        </property>
+        <property name="ver" type="java.lang.Boolean">
+            <column name="ver" />
+        </property>
+        <set name="perfils" table="perfil" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_op" not-null="true" />
+            </key>
+            <one-to-many class="Pojo.Perfil" />
+        </set>
+    </class>
+</hibernate-mapping>

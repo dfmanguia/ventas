@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/templates/clearTemplate2.xhtml">
+
+        <ui:define name="tituloPagina">Prod</ui:define>
+
+        <ui:define name="autor">DM</ui:define>
+        <ui:define name="contenido">
+            <h:head>
+                <title>Login con Permisos</title>
+                <link rel="stylesheet" href="resources/css/style.css" />
+                <style type="text/css">
+                    html {
+                        height: 100%;
+                    }
+                    body {
+                        height: 80%;
+                    }
+                </style>
+            </h:head>
+            <h:form id="frmMenu">
+                <p:menubar autoDisplay="false">
+                    <p:menuitem value="Inicio" url="inicio.xhtml" icon="principal" />  
+                    <p:submenu rendered="#{loginBean.usuario.perfil.gest}" label="Gestion" icon="mantenimiento">  
+                        <p:menuitem rendered="#{loginBean.usuario.perfil.gestProd}" value="Producto" url="ProductoC.xhtml" icon="cliente"/> 
+                        <p:menuitem rendered="#{loginBean.usuario.perfil.gestPers}" value="Personal" url="Personal.xhtml" icon="cliente"/>  
+                        <p:menuitem rendered="#{loginBean.usuario.perfil.gestCli}" value="Clientes" url="Cliente.xhtml" icon="cliente"/> 
+                    </p:submenu>
+
+                    <p:submenu rendered="#{loginBean.usuario.perfil.venta}" label="Ventas" icon="reporte">  
+                        <p:menuitem rendered="#{loginBean.usuario.perfil.ven}" value="Factura" url="index.xhtml" icon="reporte"/>
+
+                    </p:submenu>  
+
+                    <p:submenu rendered="#{loginBean.usuario.perfil.conf}" label="Configuracion" icon="configuracion">  
+                        <p:menuitem rendered="#{loginBean.usuario.perfil.confPerf}" value="Perfiles" url="perfil.xhtml" icon="perfil"/>
+                        <p:menuitem rendered="#{loginBean.usuario.perfil.confUsu}" value="Usuarios" url="usuario.xhtml" icon="usuarios"/>
+                    </p:submenu>  
+
+                    <p:menuitem value="Salir" url="login.xhtml" icon="salir" />  
+                </p:menubar>
+            </h:form>
+
+
+            <h:form id="frmprincipal">
+
+                <p:panel id="panel2">
+                    <p:panelGrid id="panel" columns="2">
+
+                        <p:outputLabel value="ID Opcion" for="idOpcion" />
+                        <p:inputText id="idOpcion" value="#{mbOpcion.selected.idOp}" />
+                        <h:outputText value="Insertar" />
+                        <p:selectBooleanCheckbox value="#{mbOpcion.opcion.ins}"/>
+                        <h:outputText value="Modificar" />
+                        <p:selectBooleanCheckbox value="#{mbOpcion.opcion.upd}"/>
+                        <h:outputText value="Visualizar" />
+                        <p:selectBooleanCheckbox value="#{mbOpcion.opcion.ver}"/>
+                        <h:outputText value="Eliminar" />
+                        <p:selectBooleanCheckbox value="#{mbOpcion.opcion.del}"/>
+             </p:panelGrid>           
+
+<p:panelGrid id="panel4" columns="3">
+                        <p:commandButton  disabled="#{loginBean.usuario.perfil.opcion.ins}" value="Ingresar" ajax="false" actionListener="#{mbOpcion.guardarOpcion()}"/>
+                        <p:commandButton disabled="#{loginBean.usuario.perfil.opcion.upd}" value="Modificar" ajax="false" actionListener="#{mbOpcion.actualizarOpcion()}"/>
+                        <p:commandButton disabled="#{loginBean.usuario.perfil.opcion.del}" value="Eliminar" ajax="false" actionListener="#{mbOpcion.eliminarOpcion()}"/>
+                    </p:panelGrid>
+                </p:panel>
+                <p:panel id="panel3">
+                    <p:panelGrid id="paneltabla" columns="1" >
+
+
+
+
+                        <p:dataTable id="tabla" value="#{mbOpcion.allOpcion}" var="item" style="font-size: 10px;width: 900px;" scrollable="true" scrollHeight="200">
+
+                            <p:column headerText="ID OPCION">
+                                <h:outputText value="#{item.idOp}"/>
+                            </p:column>
+                            <p:column headerText="INSERTAR">
+                                <h:outputText value="#{item.ins}"/>
+                            </p:column>
+                            <p:column headerText="ACTUALIZAR">
+                                <h:outputText value="#{item.upd}"/>
+                            </p:column>
+                            <p:column headerText="VISUALIZAR">
+                                <h:outputText value="#{item.ver}"/>
+                            </p:column>
+                            <p:column headerText="ELIMINAR">
+                                <h:outputText value="#{item.del}"/>
+                            </p:column>
+                             <p:column>        
+                                <p:commandButton process="@this" value= "SELECCIONAR" update=":frmprincipal:panel,tabla">
+                                    <f:setPropertyActionListener target="#{mbOpcion.opcion}" value="#{item}"></f:setPropertyActionListener>
+                                </p:commandButton>
+                            </p:column>
+
+                            
+                        </p:dataTable>
+                    </p:panelGrid>
+                </p:panel>           
+            </h:form>
+        </ui:define>
+
+    </ui:composition>    
+</html>

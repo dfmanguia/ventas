@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/templates/clearTemplate2.xhtml">
+
+        <ui:define name="tituloPagina">Prod</ui:define>
+
+        <ui:define name="autor">DM</ui:define>
+        <ui:define name="contenido">
+            <h:head>
+                <title>Login con Permisos</title>
+                <link rel="stylesheet" href="resources/css/style.css" />
+                <style type="text/css">
+                    html {
+                        height: 100%;
+                    }
+                    body {
+                        height: 80%;
+                    }
+                </style>
+            </h:head>
+            <h:form id="frmMenu">
+                <p:menubar autoDisplay="false">
+                    <p:menuitem value="Inicio" url="inicio.xhtml" icon="principal" />  
+                    <p:submenu rendered="#{loginBean.usuario.perfil.gest}" label="Gestion" icon="mantenimiento">  
+                        <p:menuitem rendered="#{loginBean.usuario.perfil.gestProd}" value="Producto" url="ProductoC.xhtml" icon="cliente"/> 
+                        <p:menuitem rendered="#{loginBean.usuario.perfil.gestPers}" value="Personal" url="Personal.xhtml" icon="cliente"/>  
+                        <p:menuitem rendered="#{loginBean.usuario.perfil.gestCli}" value="Clientes" url="Cliente.xhtml" icon="cliente"/> 
+                    </p:submenu>
+
+                    <p:submenu rendered="#{loginBean.usuario.perfil.venta}" label="Ventas" icon="reporte">  
+                        <p:menuitem rendered="#{loginBean.usuario.perfil.ven}" value="Factura" url="index.xhtml" icon="reporte"/>
+
+                    </p:submenu>  
+
+                    <p:submenu rendered="#{loginBean.usuario.perfil.conf}" label="Configuracion" icon="configuracion">  
+                        <p:menuitem rendered="#{loginBean.usuario.perfil.confPerf}" value="Perfiles" url="perfil.xhtml" icon="perfil"/>
+                        <p:menuitem rendered="#{loginBean.usuario.perfil.confUsu}" value="Usuarios" url="usuario.xhtml" icon="usuarios"/>
+                    </p:submenu>  
+
+                    <p:menuitem value="Salir" url="login.xhtml" icon="salir" />  
+                </p:menubar>
+            </h:form>
+
+
+            <h:form id="frmprincipal">
+                <p:growl id="mensajeGeneral" showDetail="true"/>
+                <p:panel id="panel2">
+                    <p:panelGrid id="panel" columns="2">
+                        <p:outputLabel for="idProd" value="Id del Cliente" />
+                        <p:inputText id="idProd" required="true" value="#{mbCliente.selected.idcliente}"></p:inputText>
+
+                        <p:outputLabel for="codBarras" value="Cédula" />
+                        <p:inputText id="codBarras" required="true" value="#{mbCliente.cliente.cedula}"></p:inputText>
+                        
+                        <p:outputLabel for="codBarras2" value="Nombre" />
+                        <p:inputText id="codBarras2" required="true" value="#{mbCliente.cliente.nombre}"></p:inputText>
+
+                        <p:outputLabel for="nombre" value="Teléfono convencional" />
+                        <p:inputText id="nombre" required="true" value="#{mbCliente.cliente.telefonoconv}"></p:inputText>
+
+                        <p:outputLabel for="pUnit" value="Teléfono celular" />
+                        <p:inputText id="pUnit" required="true" value="#{mbCliente.cliente.telefonocel}"></p:inputText>
+                        
+                        <p:outputLabel for="pUnit2" value="Dirección" />
+                        <p:inputText id="pUnit2" required="true" value="#{mbCliente.cliente.direccion}"></p:inputText>
+
+                    </p:panelGrid>
+
+                    <p:panelGrid id="panel4" columns="3">
+                        <p:commandButton disabled="#{loginBean.usuario.perfil.opcion.ins}" action="#{mbCliente.guardarCliente()}" value="INSERTAR" update="panel,tabla"></p:commandButton>
+                        <p:commandButton disabled="#{loginBean.usuario.perfil.opcion.upd}" action="#{mbCliente.actualizarCliente()}" value="MODIFICAR" update="panel,tabla"></p:commandButton>
+                        <p:commandButton  action="#{mbCliente.limpiar()}" value="LIMPIAR" update="panel,tabla"></p:commandButton>
+                    </p:panelGrid>
+                </p:panel>
+                <p:panel id="panel3">
+                    <p:panelGrid id="paneltabla" columns="1" >
+                        <p:dataTable  id="tabla" value="#{mbCliente.allCliente}" var="UsuariosItem" scrollable="true" scrollHeight="300" style="font-size: 10px;width: 1100px;">
+                            <f:facet name="header">
+                                <h:outputText value="CLIENTE"/>
+                            </f:facet>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="ID DEL CLIENTE"/>
+                                </f:facet>
+                                <h:outputText value="#{UsuariosItem.idcliente}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="CEDULA"/>
+                                </f:facet>
+                                <h:outputText value="#{UsuariosItem.cedula}"/>
+                            </p:column>
+                            <p:column filterBy="#{UsuariosItem.nombre}" filterMatchMode="contains">
+                                <f:facet name="header">
+                                    <h:outputText value="NOMBRE"/>
+                                </f:facet>
+                                <h:outputText value="#{UsuariosItem.nombre}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="TELÉFONO CONVENCIONAL"/>
+                                </f:facet>
+                                <h:outputText value="#{UsuariosItem.telefonoconv}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="TELÉFONO CELULAR"/>
+                                </f:facet>
+                                <h:outputText value="#{UsuariosItem.telefonocel}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="DIRECCIÓN"/>
+                                </f:facet>
+                                <h:outputText value="#{UsuariosItem.direccion}"/>
+                            </p:column>
+
+                            <p:column>        
+                                <p:commandButton process="@this" value= "SELECCIONAR" update=":frmprincipal:panel,tabla">
+                                    <f:setPropertyActionListener target="#{mbCliente.cliente}" value="#{UsuariosItem}"></f:setPropertyActionListener>
+                                </p:commandButton>
+                            </p:column>
+
+                            <p:column>
+                                <p:commandButton disabled="#{loginBean.usuario.perfil.opcion.ins}"  process="@this" value= "ELIMINAR" update=":frmprincipal:panel,tabla" action="#{mbCliente.eliminarCliente()}">
+                                    <f:setPropertyActionListener target="#{mbCliente.cliente}" value="#{UsuariosItem}"></f:setPropertyActionListener>
+                                </p:commandButton>
+                            </p:column>
+
+                            <f:facet name="footer">
+                                <h:outputText value="fin"/>
+                            </f:facet>
+                        </p:dataTable>
+                    </p:panelGrid>
+                </p:panel>
+
+            </h:form>
+        </ui:define>
+
+    </ui:composition>    
+</html>

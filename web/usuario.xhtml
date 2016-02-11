@@ -1,0 +1,142 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/templates/clearTemplate2.xhtml">
+
+        <ui:define name="tituloPagina">Prod</ui:define>
+
+        <ui:define name="autor">DM</ui:define>
+        <ui:define name="contenido">
+            <h:head>
+                <title>Login con Permisos</title>
+                <link rel="stylesheet" href="resources/css/style.css" />
+                <style type="text/css">
+                    html {
+                        height: 100%;
+                    }
+                    body {
+                        height: 80%;
+                    }
+                </style>
+            </h:head>
+            <h:form id="frmMenu">
+                <p:menubar autoDisplay="false">
+                    <p:menuitem value="Inicio" url="inicio.xhtml" icon="principal" />  
+                    <p:submenu rendered="#{loginBean.usuario.perfil.gest}" label="Gestion" icon="mantenimiento">  
+                        <p:menuitem rendered="#{loginBean.usuario.perfil.gestProd}" value="Producto" url="ProductoC.xhtml" icon="cliente"/> 
+                        <p:menuitem rendered="#{loginBean.usuario.perfil.gestPers}" value="Personal" url="Personal.xhtml" icon="cliente"/>  
+                        <p:menuitem rendered="#{loginBean.usuario.perfil.gestCli}" value="Clientes" url="Cliente.xhtml" icon="cliente"/> 
+                    </p:submenu>
+
+                    <p:submenu rendered="#{loginBean.usuario.perfil.venta}" label="Ventas" icon="reporte">  
+                        <p:menuitem rendered="#{loginBean.usuario.perfil.ven}" value="Factura" url="index.xhtml" icon="reporte"/>
+
+                    </p:submenu>  
+
+                    <p:submenu rendered="#{loginBean.usuario.perfil.conf}" label="Configuracion" icon="configuracion">  
+                        <p:menuitem rendered="#{loginBean.usuario.perfil.confPerf}" value="Perfiles" url="perfil.xhtml" icon="perfil"/>
+                        <p:menuitem rendered="#{loginBean.usuario.perfil.confUsu}" value="Usuarios" url="usuario.xhtml" icon="usuarios"/>
+                    </p:submenu>  
+
+                    <p:menuitem value="Salir" url="login.xhtml" icon="salir" />  
+                </p:menubar>
+            </h:form>
+
+
+            <h:form id="frmprincipal">
+                <p:growl id="mensajeGeneral" showDetail="true"/>
+                <p:panel id="panel2">
+                    <p:panelGrid id="panel" columns="2">
+                        <p:outputLabel for="idUser" value="Id del Usuario" />
+                        <p:inputText id="idUser" required="true" value="#{mbUsuario.selected.id}"></p:inputText>
+
+                        <p:outputLabel for="User" value="Usuario" />
+                        <p:inputText id="User" required="true" value="#{mbUsuario.usuario.username}"></p:inputText>
+
+                        <p:outputLabel for="Pass" value="Contrasenia" />
+                        <p:inputText id="Pass" required="true" value="#{mbUsuario.usuario.password}"></p:inputText>
+
+                        
+                        <p:outputLabel  value="Perfil: " />
+                        <p:selectOneMenu value="#{mbUsuario.usuario.perfil.id}">
+                            <f:selectItems value="#{mbPerfil.allPerfil}" var="car" 
+                                           itemLabel="#{car.descripcion}" itemValue="#{car.id}" />
+                        </p:selectOneMenu>
+
+                        <p:outputLabel for="Pers" value="Personal" />
+                        <p:inputText id="Pers" required="true" value="#{mbUsuario.usuario.personal.perId}"></p:inputText>
+
+                    </p:panelGrid>
+
+<p:panelGrid id="panel4" columns="3">
+                    <p:commandButton disabled="#{loginBean.usuario.perfil.opcion.ins}" value="Ingresar" ajax="false" actionListener="#{mbUsuario.guardarUsuario()}"/>
+                    <p:commandButton disabled="#{loginBean.usuario.perfil.opcion.upd}" value="Modificar" ajax="false" actionListener="#{mbUsuario.actualizarUsuario()}"/>
+                    <p:commandButton disabled="#{loginBean.usuario.perfil.opcion.del}" value="Eliminar" ajax="false" actionListener="#{mbUsuario.eliminarUsuario()}"/>
+</p:panelGrid>
+                </p:panel>
+                <p:panel id="panel3">
+                    <p:panelGrid id="paneltabla" columns="1" >
+                        <p:dataTable id="tabla" value="#{mbUsuario.usuarios}" var="UsuariosItem" scrollable="true" scrollHeight="300" >
+                            <f:facet name="header">
+                                <h:outputText value="USUARIOS"/>
+                            </f:facet>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="ID DEL USUARIO"/>
+                                </f:facet>
+                                <h:outputText value="#{UsuariosItem.id}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="USUARIO"/>
+                                </f:facet>
+                                <h:outputText value="#{UsuariosItem.username}"/>
+                            </p:column>
+
+                            <p:column >
+                                <f:facet name="header">
+                                    <h:outputText value="CONTRASENIA"/>
+                                </f:facet>
+                                <h:outputText value="#{UsuariosItem.password}"/>
+                            </p:column>
+
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="PERFIL_ID"/>
+                                </f:facet>
+                                <h:outputText value="#{UsuariosItem.perfil.id}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="PERSONAL_ID"/>
+                                </f:facet>
+                                <h:outputText value="#{UsuariosItem.personal.perId}"/>
+                            </p:column>
+
+
+                            <p:column>        
+                                <p:commandButton  process="@this" value= "SELECCIONAR" update=":frmprincipal:panel,tabla">
+                                    <f:setPropertyActionListener target="#{mbUsuario.usuario}" value="#{UsuariosItem}"></f:setPropertyActionListener>
+                                </p:commandButton>
+                            </p:column>
+
+                          
+
+                            <f:facet name="footer">
+                                <h:outputText value="fin"/>
+                            </f:facet>
+                        </p:dataTable>
+                    </p:panelGrid>
+                </p:panel>
+
+            </h:form>
+        </ui:define>
+
+    </ui:composition>    
+</html>

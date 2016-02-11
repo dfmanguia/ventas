@@ -1,0 +1,90 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>
+		<ui:insert name="tituloPagina">Coloque el titulo de la pagina</ui:insert>
+	</title>
+</h:head>
+
+<h:body >
+<table style="border: 1px solid #CAD6E0" align="center" cellpadding="0"
+	cellspacing="0" border="0" width="1500">
+    <tr>
+		<td height="42" align="center" valign="middle" width="100%"><h:graphicImage
+                        value="/imagenes/ecg1.jpg" width="1500" /></td>
+	</tr>
+	<tr>
+		<td class="header" height="30" align="center" valign="middle"
+			width="100%" style=" font-family: Verdana, Arial, Helvetica, sans-serif;
+				  font-size: 18px; color:black"><ui:insert name="tituloFormulario">Coloque el titulo</ui:insert>
+		</td>
+	</tr>
+	<tr>
+		<td height="1" width="100%" bgcolor="#CAD6E0"></td>
+	</tr>
+	<tr>
+		<td width="100%" colspan="2">
+                    <table width="100%" style="height: 350px" align="center" cellpadding="0"
+				cellspacing="0" border="0">		
+			<tr>
+                            <td align="justify" width="20%" valign="middle" class="formulario"
+					style=" font-family: Verdana, Arial, Helvetica, sans-serif;
+				  font-size: 14px;">
+					  <ui:insert name="menu">
+					  <h:form >
+                                              <p:menubar >
+					  		<p:submenu label="Informacion">
+					  			<p:menuitem value="El Electrocardiograma" action="#{controladorMenu.irAutor}" ajax="false"></p:menuitem>
+                                                                <p:menuitem value="Ayuda" action="#{controladorMenu.irUsuarrio}" ajax="false"></p:menuitem>
+					  		</p:submenu>
+                                                        <p:submenu label="Examen Cardiaco" >
+                                                            <p:menuitem value="Inicio Examen" action="#{controladorMenu.irLibro}" ajax="false"></p:menuitem>
+                                                                
+					  		</p:submenu>
+                                                        <p:submenu label="Ingreso de Datos" >
+                                                            <p:menuitem value="Formulario Persona" action="#{controladorMenu.irPersona()}" ajax="false"></p:menuitem>
+                                                            <p:menuitem value="Formulario Paciente" action="#{controladorMenu.irPaciente()}" ajax="false"></p:menuitem>
+                                                            <p:menuitem value="Formulario Usuario" action="#{controladorMenu.irUsuario()}" ajax="false"></p:menuitem>
+                                                            <p:menuitem value="Formulario Medico" action="#{controladorMenu.irMedico()}" ajax="false"></p:menuitem>
+                                                            <p:menuitem value="Formulario Historia Clinica" action="#{controladorMenu.irHistoriaClinica()}" ajax="false"></p:menuitem>
+                                                            <p:menuitem value="Formulario Antecedentes" action="#{controladorMenu.irAntecedentes()}" ajax="false"></p:menuitem>
+                                                            <p:menuitem value="Formulario Datos Cardiografo" action="#{controladorMenu.irDatosCardiografo()}" ajax="false"></p:menuitem>
+					  		</p:submenu>
+                                                  <p:menuitem icon="ui-icon-close" value="Salir" action="#{controldorMenu.irLibro}" ajax="false"></p:menuitem>
+                                                                
+					  	
+                                              </p:menubar>
+					  	
+					  	
+					  </h:form>
+                                          </ui:insert>
+				  
+				  </td>
+                        </tr>
+                        <tr>  
+				<td align="center" width="80%" valign="middle" class="formulario"
+					style=" font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px;">
+					<ui:insert name="contenido">Aqui va el contenido</ui:insert></td>
+				</tr>
+		    </table>
+		</td>
+	</tr>
+
+	<tr>
+		<td colspan="2" valign="bottom" height="1" width="100%"
+			bgcolor="#CAD6E0" style=" font-family: Verdana, Arial, Helvetica, sans-serif;
+				  font-style: Italic; font-size:14px;"><ui:insert name="autor">Copiado de mi amigo</ui:insert></td>
+	</tr>
+
+</table>
+</h:body>
+
+</html>
+
+
+

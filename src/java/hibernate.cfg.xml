@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+  <session-factory>
+    <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+    <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+    <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/vent?zeroDateTimeBehavior=convertToNull</property>
+    <property name="hibernate.connection.username">diego</property>
+    <property name="hibernate.connection.password">diego</property>
+    <mapping resource="Pojo/Tventa.hbm.xml"/>
+    <mapping resource="Pojo/Cliente.hbm.xml"/>
+    <mapping resource="Pojo/Personal.hbm.xml"/>
+    <mapping resource="Pojo/Tventadetalle.hbm.xml"/>
+    <mapping resource="Pojo/Tproducto.hbm.xml"/>
+    <mapping resource="Pojo/Opcion.hbm.xml"/>
+    <mapping resource="Pojo/Perfil.hbm.xml"/>
+    <mapping resource="Pojo/Usuario.hbm.xml"/>
+  </session-factory>
+</hibernate-configuration>

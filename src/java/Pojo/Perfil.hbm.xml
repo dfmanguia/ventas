@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated feb 6, 2016 11:16:58 a.m. by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="Pojo.Perfil" table="perfil" catalog="vent" optimistic-lock="version">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="opcion" class="Pojo.Opcion" fetch="select">
+            <column name="id_op" not-null="true" />
+        </many-to-one>
+        <property name="descripcion" type="string">
+            <column name="descripcion" length="25" />
+        </property>
+        <property name="gest" type="java.lang.Boolean">
+            <column name="gest" />
+        </property>
+        <property name="gestProd" type="java.lang.Boolean">
+            <column name="gest_prod" />
+        </property>
+        <property name="gestPers" type="java.lang.Boolean">
+            <column name="gest_pers" />
+        </property>
+        <property name="gestCli" type="java.lang.Boolean">
+            <column name="gest_cli" />
+        </property>
+        <property name="venta" type="java.lang.Boolean">
+            <column name="venta" />
+        </property>
+        <property name="ven" type="java.lang.Boolean">
+            <column name="ven" />
+        </property>
+        <property name="conf" type="java.lang.Boolean">
+            <column name="conf" />
+        </property>
+        <property name="confPerf" type="java.lang.Boolean">
+            <column name="conf_perf" />
+        </property>
+        <property name="confUsu" type="java.lang.Boolean">
+            <column name="conf_usu" />
+        </property>
+        <set name="usuarios" table="usuario" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="perfil_id" />
+            </key>
+            <one-to-many class="Pojo.Usuario" />
+        </set>
+        <set name="usuarios_1" table="usuario" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="perfil_id" />
+            </key>
+            <one-to-many class="Pojo.Usuario" />
+        </set>
+    </class>
+</hibernate-mapping>

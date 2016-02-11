@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated feb 6, 2016 11:16:58 a.m. by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="Pojo.Personal" table="personal" catalog="vent" optimistic-lock="version">
+        <id name="perId" type="int">
+            <column name="PER_ID" />
+            <generator class="assigned" />
+        </id>
+        <property name="perCi" type="string">
+            <column name="PER_CI" length="25" />
+        </property>
+        <property name="perNombre" type="string">
+            <column name="PER_NOMBRE" length="25" />
+        </property>
+        <property name="perApellido" type="string">
+            <column name="PER_APELLIDO" length="25" />
+        </property>
+        <property name="perDireccion" type="string">
+            <column name="PER_DIRECCION" length="25" />
+        </property>
+        <property name="perTelefono" type="string">
+            <column name="PER_TELEFONO" length="25" />
+        </property>
+        <property name="perEmail" type="string">
+            <column name="PER_EMAIL" length="25" />
+        </property>
+        <set name="usuarios" table="usuario" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="per_id" />
+            </key>
+            <one-to-many class="Pojo.Usuario" />
+        </set>
+    </class>
+</hibernate-mapping>
