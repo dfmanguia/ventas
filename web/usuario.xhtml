@@ -62,23 +62,27 @@
                         <p:outputLabel for="Pass" value="Contrasenia" />
                         <p:inputText id="Pass" required="true" value="#{mbUsuario.usuario.password}"></p:inputText>
 
-                        
+
                         <p:outputLabel  value="Perfil: " />
                         <p:selectOneMenu value="#{mbUsuario.usuario.perfil.id}">
                             <f:selectItems value="#{mbPerfil.allPerfil}" var="car" 
                                            itemLabel="#{car.descripcion}" itemValue="#{car.id}" />
                         </p:selectOneMenu>
+                        
+                        <p:outputLabel  value="Personal: " />
+                        <p:selectOneMenu value="#{mbUsuario.usuario.personal.perId}">
+                            <f:selectItems value="#{mbPersonal.allPer}" var="car" 
+                                           itemLabel="#{car.perCi}" itemValue="#{car.perId}" />
+                        </p:selectOneMenu>
 
-                        <p:outputLabel for="Pers" value="Personal" />
-                        <p:inputText id="Pers" required="true" value="#{mbUsuario.usuario.personal.perId}"></p:inputText>
-
+                        
                     </p:panelGrid>
 
-<p:panelGrid id="panel4" columns="3">
-                    <p:commandButton disabled="#{loginBean.usuario.perfil.opcion.ins}" value="Ingresar" ajax="false" actionListener="#{mbUsuario.guardarUsuario()}"/>
-                    <p:commandButton disabled="#{loginBean.usuario.perfil.opcion.upd}" value="Modificar" ajax="false" actionListener="#{mbUsuario.actualizarUsuario()}"/>
-                    <p:commandButton disabled="#{loginBean.usuario.perfil.opcion.del}" value="Eliminar" ajax="false" actionListener="#{mbUsuario.eliminarUsuario()}"/>
-</p:panelGrid>
+                    <p:panelGrid id="panel4" columns="3">
+                        <p:commandButton disabled="#{loginBean.usuario.perfil.opcion.ins}" value="Ingresar" ajax="false" actionListener="#{mbUsuario.guardarUsuario()}"/>
+                        <p:commandButton disabled="#{loginBean.usuario.perfil.opcion.upd}" value="Modificar" ajax="false" actionListener="#{mbUsuario.actualizarUsuario()}"/>
+                        <p:commandButton disabled="#{loginBean.usuario.perfil.opcion.del}" value="Eliminar" ajax="false" actionListener="#{mbUsuario.eliminarUsuario()}"/>
+                    </p:panelGrid>
                 </p:panel>
                 <p:panel id="panel3">
                     <p:panelGrid id="paneltabla" columns="1" >
@@ -126,7 +130,7 @@
                                 </p:commandButton>
                             </p:column>
 
-                          
+
 
                             <f:facet name="footer">
                                 <h:outputText value="fin"/>

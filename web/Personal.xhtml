@@ -35,7 +35,7 @@ and open the template in the editor.
                     <p:submenu rendered="#{loginBean.usuario.perfil.gest}" label="Gestion" icon="mantenimiento">  
                         <p:menuitem rendered="#{loginBean.usuario.perfil.gestProd}" value="Producto" url="ProductoC.xhtml" icon="cliente"/> 
                         <p:menuitem rendered="#{loginBean.usuario.perfil.gestPers}" value="Personal" url="Personal.xhtml" icon="cliente"/>  
- <p:menuitem rendered="#{loginBean.usuario.perfil.gestCli}" value="Clientes" url="Cliente.xhtml" icon="cliente"/> 
+                        <p:menuitem rendered="#{loginBean.usuario.perfil.gestCli}" value="Clientes" url="Cliente.xhtml" icon="cliente"/> 
                     </p:submenu>
 
                     <p:submenu rendered="#{loginBean.usuario.perfil.venta}" label="Ventas" icon="reporte">  
@@ -72,8 +72,8 @@ and open the template in the editor.
                         <p:inputText id="telefono" value="#{mbPersonal.personal.perTelefono}" />
                         <p:outputLabel value="Email" for="email" />
                         <p:inputText id="email" value="#{mbPersonal.personal.perEmail}" />
-             </p:panelGrid>          
-<p:panelGrid id="panel4" columns="3"> 
+                    </p:panelGrid>          
+                    <p:panelGrid id="panel4" columns="3"> 
                         <p:commandButton disabled="#{loginBean.usuario.perfil.opcion.ins}" value="Ingresar" ajax="false" actionListener="#{mbPersonal.guardarPersonal()}"/>
                         <p:commandButton disabled="#{loginBean.usuario.perfil.opcion.upd}" value="Modificar" ajax="false" actionListener="#{mbPersonal.actualizarPersonal()}"/>
                         <p:commandButton disabled="#{loginBean.usuario.perfil.opcion.del}" value="Eliminar" ajax="false" actionListener="#{mbPersonal.eliminarPersonal()}"/>
@@ -108,8 +108,8 @@ and open the template in the editor.
                             <p:column headerText="EMAIL">
                                 <h:outputText value="#{item.perEmail}"/>
                             </p:column>
-                            
-                             <p:column>        
+
+                            <p:column>        
                                 <p:commandButton process="@this" value= "SELECCIONAR" update=":frmprincipal:panel,tabla">
                                     <f:setPropertyActionListener target="#{mbPersonal.personal}" value="#{item}"></f:setPropertyActionListener>
                                 </p:commandButton>
@@ -124,7 +124,7 @@ and open the template in the editor.
                             <f:facet name="footer">
                                 <h:outputText value="fin"/>
                             </f:facet>
-                            
+
                         </p:dataTable>
                     </p:panelGrid>
                 </p:panel>           
