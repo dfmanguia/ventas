@@ -1,5 +1,6 @@
 package ManagedBeanView;
 
+import Dao.Encriptar;
 import Interface.UsuarioDao;
 import Dao.UsuarioDaoImpl;
 import Pojo.Usuario;
@@ -19,12 +20,13 @@ public class LoginBean {
     public LoginBean() {
     }
 
-    public void login(ActionEvent actionEvent) {
+    public void login(ActionEvent actionEvent) throws Exception {
         RequestContext context = RequestContext.getCurrentInstance();
         FacesMessage msg = null;
         boolean loggedIn = false;
 
         UsuarioDao usuarioDao = new UsuarioDaoImpl();
+        this.usuario.setPassword(Encriptar.Encriptar(this.usuario.getPassword()));
         usuario = usuarioDao.buscarPorUsuario(usuario);
 
         if (usuario != null) {

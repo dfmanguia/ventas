@@ -1,9 +1,12 @@
 package ManagedBeanView;
 
+import Dao.Encriptar;
 import Interface.UsuarioDao;
 import Dao.UsuarioDaoImpl;
 import HibernateUtil.HibernateUtil;
 import Pojo.Usuario;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -18,6 +21,7 @@ import javax.faces.context.FacesContext;
 
 
 import javax.inject.Named;
+
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -96,7 +100,9 @@ public void init() {
             UsuarioDaoImpl daoTUsuario = new UsuarioDaoImpl();
 
             this.transaction = this.session.beginTransaction();
-
+            this.usuario.setPassword(Encriptar.Encriptar(this.usuario.getPassword()));
+            
+          
             daoTUsuario.insert(this.session, this.usuario);
 
             this.transaction.commit();
@@ -110,7 +116,7 @@ public void init() {
         limpiar();
 
     }
-
+ 
     public void actualizarUsuario() {
         this.session = null;
         this.transaction = null;
@@ -121,6 +127,7 @@ public void init() {
             UsuarioDaoImpl daoTUsuario = new UsuarioDaoImpl();
 
             this.transaction = this.session.beginTransaction();
+            this.usuario.setPassword(Encriptar.Encriptar(this.usuario.getPassword()));
 
             daoTUsuario.update(this.session, this.usuario);
 
