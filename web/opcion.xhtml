@@ -13,9 +13,9 @@ and open the template in the editor.
 
     <ui:composition template="/templates/clearTemplate2.xhtml">
 
-        <ui:define name="tituloPagina">Prod</ui:define>
+        <ui:define name="tituloPagina">Opcion</ui:define>
 
-        <ui:define name="autor">DM</ui:define>
+        <ui:define name="autor">USUARIO: #{loginBean.usuario.username}</ui:define>
         <ui:define name="contenido">
             <h:head>
                 <title>Login con Permisos</title>

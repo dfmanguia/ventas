@@ -10,9 +10,9 @@
 
     <ui:composition template="/templates/clearTemplate2.xhtml">
 
-        <ui:define name="tituloPagina">Prod</ui:define>
+        <ui:define name="tituloPagina">Inicio</ui:define>
 
-        <ui:define name="autor">DM</ui:define>
+        <ui:define name="autor">USUARIO: #{loginBean.usuario.username}</ui:define>
         <ui:define name="contenido">
            
             <h:head>
@@ -32,6 +32,7 @@
     
    
         <h:form id="frmMenu">
+            
             <p:menubar autoDisplay="false">
                 <p:menuitem value="Inicio" url="inicio.xhtml" icon="principal" />  
                 <p:submenu rendered="#{loginBean.usuario.perfil.gest}" label="Gestion" icon="mantenimiento">  
