@@ -4,7 +4,8 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 
 
 
@@ -48,12 +49,34 @@
                     <p:menuitem value="Salir" url="login.xhtml" icon="salir" />  
                 </p:menubar>
             </h:form>
+             
             <h:form id="frmRealizarVentas">
                 <p:growl id="mensajeGeneral" showDetail="true"/>
                 <h1>Venta de Productos</h1>
                 <hr />
+                
+               
                 <p:panelGrid columns="1">
+                    
                     <h:panelGroup>
+                 <p:outputLabel value="Empleado:         " style="font-weight:bold"/>
+                 <p:outputLabel  value="#{loginBean.usuario.personal.perNombre}"   style="font-weight:bold"/>
+                
+             
+                 <br></br>
+                        
+                        <br></br>
+                        <p:outputLabel  value="Cliente: " />
+                        <p:selectOneMenu value="#{mbVVenta.venta.idClie}">
+                            <f:selectItems value="#{mbCliente.allCliente}" var="car" 
+                                           itemLabel="#{car.cedula}" itemValue="#{car.idcliente}" />
+                        </p:selectOneMenu>
+                        <hr></hr>
+                         </h:panelGroup>
+               
+                    <h:panelGroup>
+                       
+                        
                         Agregar por código de barras
                         <p:inputText id="txtAgregarPorCodigoBarras" value="#{mbVVenta.valorCodigoBarras}">
                             <p:ajax event="keyup" listener="#{mbVVenta.agregarListaVentaDetallePorCodigoBarras()}"/>

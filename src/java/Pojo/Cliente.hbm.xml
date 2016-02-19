@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated feb 6, 2016 11:16:58 a.m. by Hibernate Tools 4.3.1 -->
+<!-- Generated feb 18, 2016 6:41:00 p.m. by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="Pojo.Cliente" table="cliente" catalog="vent" optimistic-lock="version">
         <id name="idcliente" type="int">

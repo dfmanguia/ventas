@@ -1,5 +1,5 @@
 package Pojo;
-// Generated feb 6, 2016 11:16:57 a.m. by Hibernate Tools 4.3.1
+// Generated feb 18, 2016 6:40:59 p.m. by Hibernate Tools 4.3.1
 
 
 import java.math.BigDecimal;
@@ -14,6 +14,8 @@ public class Tventa  implements java.io.Serializable {
 
 
      private Integer idVenta;
+     private int idPers;
+     private int idClie;
      private BigDecimal precioVentaTotal;
      private Date fechaRegistro;
      private Set tventadetalles = new HashSet(0);
@@ -22,11 +24,15 @@ public class Tventa  implements java.io.Serializable {
     }
 
 	
-    public Tventa(BigDecimal precioVentaTotal, Date fechaRegistro) {
+    public Tventa(int idPers, int idClie, BigDecimal precioVentaTotal, Date fechaRegistro) {
+        this.idPers = idPers;
+        this.idClie = idClie;
         this.precioVentaTotal = precioVentaTotal;
         this.fechaRegistro = fechaRegistro;
     }
-    public Tventa(BigDecimal precioVentaTotal, Date fechaRegistro, Set tventadetalles) {
+    public Tventa(int idPers, int idClie, BigDecimal precioVentaTotal, Date fechaRegistro, Set tventadetalles) {
+       this.idPers = idPers;
+       this.idClie = idClie;
        this.precioVentaTotal = precioVentaTotal;
        this.fechaRegistro = fechaRegistro;
        this.tventadetalles = tventadetalles;
@@ -38,6 +44,20 @@ public class Tventa  implements java.io.Serializable {
     
     public void setIdVenta(Integer idVenta) {
         this.idVenta = idVenta;
+    }
+    public int getIdPers() {
+        return this.idPers;
+    }
+    
+    public void setIdPers(int idPers) {
+        this.idPers = idPers;
+    }
+    public int getIdClie() {
+        return this.idClie;
+    }
+    
+    public void setIdClie(int idClie) {
+        this.idClie = idClie;
     }
     public BigDecimal getPrecioVentaTotal() {
         return this.precioVentaTotal;

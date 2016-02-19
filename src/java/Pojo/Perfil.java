@@ -1,5 +1,5 @@
 package Pojo;
-// Generated feb 6, 2016 11:16:57 a.m. by Hibernate Tools 4.3.1
+// Generated feb 18, 2016 6:40:59 p.m. by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -24,17 +24,15 @@ public class Perfil  implements java.io.Serializable {
      private Boolean confPerf;
      private Boolean confUsu;
      private Set usuarios = new HashSet(0);
-     private Set usuarios_1 = new HashSet(0);
 
     public Perfil() {
         this.opcion=new Opcion();
     }
-
 	
     public Perfil(Opcion opcion) {
         this.opcion = opcion;
     }
-    public Perfil(Opcion opcion, String descripcion, Boolean gest, Boolean gestProd, Boolean gestPers, Boolean gestCli, Boolean venta, Boolean ven, Boolean conf, Boolean confPerf, Boolean confUsu, Set usuarios, Set usuarios_1) {
+    public Perfil(Opcion opcion, String descripcion, Boolean gest, Boolean gestProd, Boolean gestPers, Boolean gestCli, Boolean venta, Boolean ven, Boolean conf, Boolean confPerf, Boolean confUsu, Set usuarios) {
        this.opcion = opcion;
        this.descripcion = descripcion;
        this.gest = gest;
@@ -47,7 +45,6 @@ public class Perfil  implements java.io.Serializable {
        this.confPerf = confPerf;
        this.confUsu = confUsu;
        this.usuarios = usuarios;
-       this.usuarios_1 = usuarios_1;
     }
    
     public Integer getId() {
@@ -140,13 +137,6 @@ public class Perfil  implements java.io.Serializable {
     
     public void setUsuarios(Set usuarios) {
         this.usuarios = usuarios;
-    }
-    public Set getUsuarios_1() {
-        return this.usuarios_1;
-    }
-    
-    public void setUsuarios_1(Set usuarios_1) {
-        this.usuarios_1 = usuarios_1;
     }
 
 

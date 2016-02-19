@@ -3,11 +3,11 @@
 <hibernate-reverse-engineering>
   <schema-selection match-catalog="vent"/>
   <table-filter match-name="tventa"/>
-  <table-filter match-name="personal"/>
-  <table-filter match-name="opcion"/>
+  <table-filter match-name="tventadetalle"/>
   <table-filter match-name="tproducto"/>
   <table-filter match-name="perfil"/>
-  <table-filter match-name="usuario"/>
+  <table-filter match-name="opcion"/>
+  <table-filter match-name="personal"/>
   <table-filter match-name="cliente"/>
-  <table-filter match-name="tventadetalle"/>
+  <table-filter match-name="usuario"/>
 </hibernate-reverse-engineering>
