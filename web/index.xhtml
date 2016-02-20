@@ -32,8 +32,8 @@
                     <p:menuitem value="Inicio" url="inicio.xhtml" icon="principal" />  
                     <p:submenu rendered="#{loginBean.usuario.perfil.gest}" label="Gestion" icon="mantenimiento">  
                         <p:menuitem rendered="#{loginBean.usuario.perfil.gestProd}" value="Producto" url="ProductoC.xhtml" icon="cliente"/> 
-                    <p:menuitem rendered="#{loginBean.usuario.perfil.gestPers}" value="Personal" url="Personal.xhtml" icon="cliente"/>  
-             <p:menuitem rendered="#{loginBean.usuario.perfil.gestCli}" value="Clientes" url="Cliente.xhtml" icon="cliente"/> 
+                        <p:menuitem rendered="#{loginBean.usuario.perfil.gestPers}" value="Personal" url="Personal.xhtml" icon="cliente"/>  
+                        <p:menuitem rendered="#{loginBean.usuario.perfil.gestCli}" value="Clientes" url="Cliente.xhtml" icon="cliente"/> 
                     </p:submenu>
 
                     <p:submenu rendered="#{loginBean.usuario.perfil.venta}" label="Ventas" icon="reporte">  
@@ -49,34 +49,32 @@
                     <p:menuitem value="Salir" url="login.xhtml" icon="salir" />  
                 </p:menubar>
             </h:form>
-             
+
             <h:form id="frmRealizarVentas">
                 <p:growl id="mensajeGeneral" showDetail="true"/>
                 <h1>Venta de Productos</h1>
                 <hr />
-                
-               
+
+
                 <p:panelGrid columns="1">
-                    
-                    <h:panelGroup>
-                 <p:outputLabel value="Empleado:         " style="font-weight:bold"/>
-                 <p:outputLabel  value="#{loginBean.usuario.personal.perNombre}"  style="font-weight:bold"/>
-                 <p:outputLabel  value="#{mbVVenta.venta.setIdPers(loginBean.usuario.personal.perId)}"   style="font-weight:bold"/>
-             
-                 <br></br>
-                        
-                        <br></br>
+
+
+                    <p:panelGrid id="panel9" columns="2">
+                        <p:outputLabel value="Empleado:" style="font-weight:bold"/>
+                        <p:outputLabel  value="#{loginBean.usuario.personal.perNombre}"  style="font-weight:bold"/>
+                        <p:outputLabel  value="#{mbVVenta.venta.setIdPers(loginBean.usuario.personal.perId)}"   style="font-weight:bold" rendered="false"/>
                         <p:outputLabel  value="Cliente: " />
                         <p:selectOneMenu value="#{mbVVenta.venta.idClie}">
                             <f:selectItems value="#{mbCliente.allCliente}" var="car" 
                                            itemLabel="#{car.cedula}" itemValue="#{car.idcliente}" />
                         </p:selectOneMenu>
-                        <hr></hr>
-                         </h:panelGroup>
-               
+
+                    </p:panelGrid>
+
+
                     <h:panelGroup>
-                       
-                        
+
+
                         Agregar por código de barras
                         <p:inputText id="txtAgregarPorCodigoBarras" value="#{mbVVenta.valorCodigoBarras}">
                             <p:ajax event="keyup" listener="#{mbVVenta.agregarListaVentaDetallePorCodigoBarras()}"/>
@@ -135,7 +133,7 @@
                     </h:panelGroup>
                 </p:panelGrid>
             </h:form>
-            
+
         </ui:define>
     </ui:composition>
 </html>

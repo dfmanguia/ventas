@@ -64,8 +64,8 @@ and open the template in the editor.
                         <p:outputLabel for="idPerf" value="Id del Perfil" />
                         <p:inputText id="idPerf"  value="#{mbPerfil.selected.id}"></p:inputText>
 
-                        <p:outputLabel  value="opciones: " />
-                        <p:selectOneMenu value="#{mbPerfil.perfil.opcion.idOp}">
+                        <p:outputLabel  value="Opciones de Perfil: " />
+                        <p:selectOneMenu value="#{mbPerfil.perfil.opcion.idOp}" style="width:180px;">
                             <f:selectItems value="#{mbOpcion.allOpcion}" var="car" 
                                            itemLabel="#{car.idOp}" itemValue="#{car.idOp}" />
                         </p:selectOneMenu>

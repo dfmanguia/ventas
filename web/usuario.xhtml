@@ -64,13 +64,13 @@
 
 
                         <p:outputLabel  value="Perfil: " />
-                        <p:selectOneMenu value="#{mbUsuario.usuario.perfil.id}">
+                        <p:selectOneMenu value="#{mbUsuario.usuario.perfil.id}" style="width:180px;">
                             <f:selectItems value="#{mbPerfil.allPerfil}" var="car" 
                                            itemLabel="#{car.descripcion}" itemValue="#{car.id}" />
                         </p:selectOneMenu>
                         
                         <p:outputLabel  value="Personal: " />
-                        <p:selectOneMenu value="#{mbUsuario.usuario.personal.perId}">
+                        <p:selectOneMenu value="#{mbUsuario.usuario.personal.perId}" style="width:180px;">
                             <f:selectItems value="#{mbPersonal.allPer}" var="car" 
                                            itemLabel="#{car.perCi}" itemValue="#{car.perId}" />
                         </p:selectOneMenu>
