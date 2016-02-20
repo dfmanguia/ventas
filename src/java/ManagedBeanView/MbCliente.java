@@ -6,6 +6,7 @@
 package ManagedBeanView;
 
 import Dao.DaoTCliente;
+import Dao.Encriptar;
 import HibernateUtil.HibernateUtil;
 import Pojo.Cliente;
 import java.util.List;
@@ -15,6 +16,7 @@ import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import javax.swing.JOptionPane;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -56,6 +58,9 @@ public class MbCliente {
         this.transaction = null;
 
         try {
+            
+            if(Encriptar.validadorDeCedula(this.cliente.getCedula()))
+            {
             this.session = HibernateUtil.getSessionFactory().openSession();
 
             DaoTCliente daoTCliente = new DaoTCliente();
@@ -65,8 +70,17 @@ public class MbCliente {
             daoTCliente.insert(this.session, this.cliente);
 
             this.transaction.commit();
-
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Cliente Ingresado Correctamente", ""));
+ FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Correcto", "Producto agregado"));
+                System.out.println("correcto");
+              }
+            else
+            {
+          FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "inCorrecto", "Producto agregado"));
+             System.out.println("incorrecto");
+                
+            }
+        
+        
         } catch (Exception e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -167,4 +181,6 @@ public class MbCliente {
             }
         }
     }
+     
+     
 }

@@ -7,10 +7,10 @@ and open the template in the editor.
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 
 <ui:composition template="/templates/clearTemplate2.xhtml">
 
@@ -79,7 +79,7 @@ and open the template in the editor.
                     </p:panelGrid>
 
                     <p:panelGrid id="panel4" columns="3">
-                        <p:commandButton disabled="#{loginBean.usuario.perfil.opcion.ins}" action="#{mbCliente.guardarCliente()}" value="INSERTAR" update="panel,tabla"></p:commandButton>
+                        <p:commandButton disabled="#{loginBean.usuario.perfil.opcion.ins}" onerror="oksdfd" action="#{mbCliente.guardarCliente()}" value="INSERTAR" update="panel,tabla"></p:commandButton>
                         <p:commandButton disabled="#{loginBean.usuario.perfil.opcion.upd}" action="#{mbCliente.actualizarCliente()}" value="MODIFICAR" update="panel,tabla"></p:commandButton>
                         <p:commandButton  action="#{mbCliente.limpiar()}" value="LIMPIAR" update="panel,tabla"></p:commandButton>
                     </p:panelGrid>
@@ -134,7 +134,7 @@ and open the template in the editor.
                             </p:column>
 
                             <p:column>
-                                <p:commandButton disabled="#{loginBean.usuario.perfil.opcion.ins}"  process="@this" value= "ELIMINAR" update=":frmprincipal:panel,tabla" action="#{mbCliente.eliminarCliente()}">
+                                <p:commandButton disabled="#{loginBean.usuario.perfil.opcion.del}"  process="@this" value= "ELIMINAR" update=":frmprincipal:panel,tabla" action="#{mbCliente.eliminarCliente()}">
                                     <f:setPropertyActionListener target="#{mbCliente.cliente}" value="#{UsuariosItem}"></f:setPropertyActionListener>
                                 </p:commandButton>
                             </p:column>
