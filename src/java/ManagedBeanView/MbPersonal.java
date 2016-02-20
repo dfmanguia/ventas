@@ -18,6 +18,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import java.util.ArrayList;
 import java.util.List;
+import org.primefaces.context.RequestContext;
 /**
  *
  * @author Diegg
@@ -63,8 +64,8 @@ public Personal getSelected() {
 
             this.transaction.commit();
 
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Correcto", "Ingresado correctamente"));
-
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Correcto", "Personal Ingresado correctamente"));
+            RequestContext.getCurrentInstance().update("frmprincipal:mensajeGeneral");
         } catch (Exception ex) {
             Logger.getLogger(MbProducto.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -85,8 +86,8 @@ public Personal getSelected() {
 
             this.transaction.commit();
 
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Correcto", "actualizado correctamente"));
-
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Correcto", "Personal actualizado correctamente"));
+            RequestContext.getCurrentInstance().update("frmprincipal:mensajeGeneral");
         } catch (Exception ex) {
             Logger.getLogger(MbProducto.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -107,8 +108,8 @@ public Personal getSelected() {
 
             this.transaction.commit();
 
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Correcto", "Eliminado correctamente"));
-
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Correcto", "Personal eliminado correctamente"));
+            RequestContext.getCurrentInstance().update("frmprincipal:mensajeGeneral");
         } catch (Exception ex) {
             Logger.getLogger(MbProducto.class.getName()).log(Level.SEVERE, null, ex);
         }

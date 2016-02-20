@@ -17,6 +17,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.primefaces.context.RequestContext;
 
 /**
  *
@@ -31,11 +32,10 @@ public class MbOpcion {
      */
     public MbOpcion() {
     }
-     Session session;
+    Session session;
     Transaction transaction;
     private Opcion opcion;
     private List<Opcion> listaOpcion;
-
 
     public Opcion getOpcion() {
         return opcion;
@@ -68,7 +68,8 @@ public class MbOpcion {
 
             this.transaction.commit();
 
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Opcion Ingresado Correctamente", ""));
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "", "Opcion Ingresado Correctamente"));
+            RequestContext.getCurrentInstance().update("frmprincipal:mensajeGeneral");
         } catch (Exception e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -93,7 +94,8 @@ public class MbOpcion {
 
             this.transaction.commit();
 
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Opcion Actualizado Correctamente", ""));
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "", "Opcion Actualizada Correctamente"));
+            RequestContext.getCurrentInstance().update("frmprincipal:mensajeGeneral");
 
         } catch (Exception ex) {
             Logger.getLogger(MbOpcion.class.getName()).log(Level.SEVERE, null, ex);
@@ -117,8 +119,8 @@ public class MbOpcion {
 
             this.transaction.commit();
 
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Opcion Eliminado Correctamente", ""));
-
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "", "Opcion Eliminada Correctamente"));
+            RequestContext.getCurrentInstance().update("frmprincipal:mensajeGeneral");
         } catch (Exception ex) {
             Logger.getLogger(MbOpcion.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -130,41 +132,33 @@ public class MbOpcion {
     public void limpiar() {
         opcion = new Opcion();
     }
-    
-     public List<Opcion> getAllOpcion()
-    {
-        this.session=null;
-        this.transaction=null;
-        
-        try
-        {
-            this.session=HibernateUtil.getSessionFactory().openSession();
-            
-            DaoTOpcion daoopcion=new DaoTOpcion();
-            
-            this.transaction=this.session.beginTransaction();
-            
-            this.listaOpcion=daoopcion.getAll(this.session);
-            
+
+    public List<Opcion> getAllOpcion() {
+        this.session = null;
+        this.transaction = null;
+
+        try {
+            this.session = HibernateUtil.getSessionFactory().openSession();
+
+            DaoTOpcion daoopcion = new DaoTOpcion();
+
+            this.transaction = this.session.beginTransaction();
+
+            this.listaOpcion = daoopcion.getAll(this.session);
+
             this.transaction.commit();
-            
+
             return this.listaOpcion;
-        }
-        catch(Exception ex)
-        {
-            if(this.transaction!=null)
-            {
+        } catch (Exception ex) {
+            if (this.transaction != null) {
                 transaction.rollback();
             }
-            
+
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Error", ex.getMessage()));
-            
+
             return null;
-        }
-        finally
-        {
-            if(this.session!=null)
-            {
+        } finally {
+            if (this.session != null) {
                 this.session.close();
             }
         }

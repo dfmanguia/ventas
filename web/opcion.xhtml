@@ -54,7 +54,7 @@ and open the template in the editor.
 
 
             <h:form id="frmprincipal">
-
+                <p:growl id="mensajeGeneral" showDetail="true"/>
                 <p:panel id="panel2">
                     <p:panelGrid id="panel" columns="2">
 
@@ -68,9 +68,9 @@ and open the template in the editor.
                         <p:selectBooleanCheckbox value="#{mbOpcion.opcion.ver}"/>
                         <h:outputText value="Eliminar" />
                         <p:selectBooleanCheckbox value="#{mbOpcion.opcion.del}"/>
-             </p:panelGrid>           
+                    </p:panelGrid>           
 
-<p:panelGrid id="panel4" columns="3">
+                    <p:panelGrid id="panel4" columns="3">
                         <p:commandButton  disabled="#{loginBean.usuario.perfil.opcion.ins}" value="Ingresar" ajax="false" actionListener="#{mbOpcion.guardarOpcion()}"/>
                         <p:commandButton disabled="#{loginBean.usuario.perfil.opcion.upd}" value="Modificar" ajax="false" actionListener="#{mbOpcion.actualizarOpcion()}"/>
                         <p:commandButton disabled="#{loginBean.usuario.perfil.opcion.del}" value="Eliminar" ajax="false" actionListener="#{mbOpcion.eliminarOpcion()}"/>
@@ -99,13 +99,13 @@ and open the template in the editor.
                             <p:column headerText="ELIMINAR">
                                 <h:outputText value="#{item.del}"/>
                             </p:column>
-                             <p:column>        
+                            <p:column>        
                                 <p:commandButton process="@this" value= "SELECCIONAR" update=":frmprincipal:panel,tabla">
                                     <f:setPropertyActionListener target="#{mbOpcion.opcion}" value="#{item}"></f:setPropertyActionListener>
                                 </p:commandButton>
                             </p:column>
 
-                            
+
                         </p:dataTable>
                     </p:panelGrid>
                 </p:panel>           

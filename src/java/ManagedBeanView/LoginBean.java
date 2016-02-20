@@ -31,10 +31,10 @@ public class LoginBean {
 
         if (usuario != null) {
             loggedIn = true;
-            msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Welcome", "Usuario");
+            msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Bienvenido", "Usuario");
         } else {
             loggedIn = false;
-            msg = new FacesMessage(FacesMessage.SEVERITY_WARN, "Login Error", "Invalid credentials");
+            msg = new FacesMessage(FacesMessage.SEVERITY_WARN, "Error de login", "Credenciales inválidas");
         }
 
         FacesContext.getCurrentInstance().addMessage(null, msg);

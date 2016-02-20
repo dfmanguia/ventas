@@ -16,6 +16,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.primefaces.context.RequestContext;
 
 /**
  *
@@ -35,10 +36,11 @@ public class MbProducto {
     public Tproducto getProducto() {
         return producto;
     }
-public Tproducto getSelected() {
+
+    public Tproducto getSelected() {
         if (producto == null) {
             producto = new Tproducto();
-            
+
         }
         return producto;
     }
@@ -62,13 +64,13 @@ public Tproducto getSelected() {
 
             this.transaction.commit();
 
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Correcto", "Venta realizada correctamente"));
-
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Correcto", "Producto agregado correctamente"));
+            RequestContext.getCurrentInstance().update("frmprincipal:mensajeGeneral");
         } catch (Exception ex) {
             Logger.getLogger(MbProducto.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     public void actualizarProducto() {
         this.session = null;
         this.transaction = null;
@@ -84,14 +86,14 @@ public Tproducto getSelected() {
 
             this.transaction.commit();
 
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Correcto", "Venta realizada correctamente"));
-
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Correcto", "Producto actualizado correctamente"));
+            RequestContext.getCurrentInstance().update("frmprincipal:mensajeGeneral");
         } catch (Exception ex) {
             Logger.getLogger(MbProducto.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-     
-      public void eliminarProducto() {
+
+    public void eliminarProducto() {
         this.session = null;
         this.transaction = null;
 
@@ -106,12 +108,10 @@ public Tproducto getSelected() {
 
             this.transaction.commit();
 
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Correcto", "Venta realizada correctamente"));
-
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Correcto", "Producto eliminado correctamente"));
+            RequestContext.getCurrentInstance().update("frmprincipal:mensajeGeneral");
         } catch (Exception ex) {
             Logger.getLogger(MbProducto.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }
-
-

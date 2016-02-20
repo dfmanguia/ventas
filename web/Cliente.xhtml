@@ -79,7 +79,7 @@ and open the template in the editor.
                     </p:panelGrid>
 
                     <p:panelGrid id="panel4" columns="3">
-                        <p:commandButton disabled="#{loginBean.usuario.perfil.opcion.ins}" onerror="oksdfd" action="#{mbCliente.guardarCliente()}" value="INSERTAR" update="panel,tabla"></p:commandButton>
+                        <p:commandButton disabled="#{loginBean.usuario.perfil.opcion.ins}"  onerror="oksdfd" action="#{mbCliente.guardarCliente()}" value="INSERTAR" update="panel,tabla"></p:commandButton>
                         <p:commandButton disabled="#{loginBean.usuario.perfil.opcion.upd}" action="#{mbCliente.actualizarCliente()}" value="MODIFICAR" update="panel,tabla"></p:commandButton>
                         <p:commandButton  action="#{mbCliente.limpiar()}" value="LIMPIAR" update="panel,tabla"></p:commandButton>
                     </p:panelGrid>

@@ -14,28 +14,28 @@ and open the template in the editor.
     <ui:composition template="/templates/clearTemplate2.xhtml">
 
         <ui:define name="tituloPagina">Producto</ui:define>
-        
+
         <ui:define name="autor">USUARIO: #{loginBean.usuario.username}</ui:define>
         <ui:define name="contenido">
- <h:head>
-        <title>Login con Permisos</title>
-        <link rel="stylesheet" href="resources/css/style.css" />
-        <style type="text/css">
-            html {
-                height: 100%;
-            }
-            body {
-                height: 80%;
-            }
-        </style>
-    </h:head>
+            <h:head>
+                <title>Login con Permisos</title>
+                <link rel="stylesheet" href="resources/css/style.css" />
+                <style type="text/css">
+                    html {
+                        height: 100%;
+                    }
+                    body {
+                        height: 80%;
+                    }
+                </style>
+            </h:head>
             <h:form id="frmMenu">
                 <p:menubar autoDisplay="false">
                     <p:menuitem value="Inicio" url="inicio.xhtml" icon="principal" />  
                     <p:submenu rendered="#{loginBean.usuario.perfil.gest}" label="Gestion" icon="mantenimiento">  
                         <p:menuitem rendered="#{loginBean.usuario.perfil.gestProd}" value="Producto" url="ProductoC.xhtml" icon="cliente"/> 
-                    <p:menuitem rendered="#{loginBean.usuario.perfil.gestPers}" value="Personal" url="Personal.xhtml" icon="cliente"/>  
- <p:menuitem rendered="#{loginBean.usuario.perfil.gestCli}" value="Clientes" url="Cliente.xhtml" icon="cliente"/> 
+                        <p:menuitem rendered="#{loginBean.usuario.perfil.gestPers}" value="Personal" url="Personal.xhtml" icon="cliente"/>  
+                        <p:menuitem rendered="#{loginBean.usuario.perfil.gestCli}" value="Clientes" url="Cliente.xhtml" icon="cliente"/> 
                     </p:submenu>
 
                     <p:submenu rendered="#{loginBean.usuario.perfil.venta}" label="Ventas" icon="reporte">  
@@ -54,7 +54,7 @@ and open the template in the editor.
 
 
             <h:form id="frmprincipal">
-
+                <p:growl id="mensajeGeneral" showDetail="true"/>
                 <p:panel id="panel2">
                     <p:panelGrid id="panel" columns="2">
 
@@ -68,13 +68,13 @@ and open the template in the editor.
                         <p:inputText id="precioVentaUnitario" value="#{mbProducto.producto.precioVentaUnitario}" title="#{bundle.CreateTproductoTitle_precioVentaUnitario}"  requiredMessage="#{bundle.CreateTproductoRequiredMessage_precioVentaUnitario}"/>
                         <p:outputLabel value="Cantidad" for="cantidad" />
                         <p:inputText id="cantidad" value="#{mbProducto.producto.cantidad}" />
-</p:panelGrid>
-                    
-<p:panelGrid id="panel4" columns="3">
+                    </p:panelGrid>
+
+                    <p:panelGrid id="panel4" columns="3">
                         <p:commandButton disabled="#{loginBean.usuario.perfil.opcion.ins}" value="Ingresar" ajax="false" actionListener="#{mbProducto.guardarProducto()}"/>
                         <p:commandButton disabled="#{loginBean.usuario.perfil.opcion.upd}" value="Modificar" ajax="false" actionListener="#{mbProducto.actualizarProducto()}"/>
                         <p:commandButton disabled="#{loginBean.usuario.perfil.opcion.del}" value="Eliminar" ajax="false" actionListener="#{mbProducto.eliminarProducto()}"/>
-                  </p:panelGrid>  
+                    </p:panelGrid>  
                 </p:panel>
                 <p:panel id="panel3">
                     <p:panelGrid id="paneltabla" columns="1" >
@@ -115,7 +115,7 @@ and open the template in the editor.
                             <f:facet name="footer">
                                 <h:outputText value="fin"/>
                             </f:facet>
-                            
+
                         </p:dataTable>
                     </p:panelGrid>
                 </p:panel>           

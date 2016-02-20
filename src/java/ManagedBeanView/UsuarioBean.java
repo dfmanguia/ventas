@@ -19,11 +19,11 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
-
 import javax.inject.Named;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.primefaces.context.RequestContext;
 
 @Named(value = "mbUsuario")
 @RequestScoped
@@ -34,19 +34,19 @@ public class UsuarioBean {
     Transaction transaction;
     private Usuario usuario;
     private List<Usuario> usuarios;
-   /* 
+
+    /* 
 
     public UsuarioBean() {
         usuario=new Usuario();
         usuarios=new ArrayList<Usuario>();
     }*/
 
-    
-  @PostConstruct
-public void init() {
-   usuario=new Usuario();
-      usuarios=new ArrayList<Usuario>();
-}
+    @PostConstruct
+    public void init() {
+        usuario = new Usuario();
+        usuarios = new ArrayList<Usuario>();
+    }
 
     public Usuario getUsuario() {
         return usuario;
@@ -81,7 +81,7 @@ public void init() {
     public void setUsuarios(List<Usuario> usuarios) {
         this.usuarios = usuarios;
     }
-    
+
     public Usuario getSelected() {
         if (usuario == null) {
             usuario = new Usuario();
@@ -89,7 +89,7 @@ public void init() {
         }
         return usuario;
     }
-    
+
     public void guardarUsuario() {
         this.session = null;
         this.transaction = null;
@@ -101,13 +101,13 @@ public void init() {
 
             this.transaction = this.session.beginTransaction();
             this.usuario.setPassword(Encriptar.Encriptar(this.usuario.getPassword()));
-            
-          
+
             daoTUsuario.insert(this.session, this.usuario);
 
             this.transaction.commit();
 
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Usuario Ingresado Correctamente", ""));
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "", "Usuario Ingresado Correctamente"));
+            RequestContext.getCurrentInstance().update("frmprincipal:mensajeGeneral");
         } catch (Exception e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -116,7 +116,7 @@ public void init() {
         limpiar();
 
     }
- 
+
     public void actualizarUsuario() {
         this.session = null;
         this.transaction = null;
@@ -133,7 +133,8 @@ public void init() {
 
             this.transaction.commit();
 
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Usuario Actualizado Correctamente", ""));
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "", "Usuario Actualizado Correctamente"));
+            RequestContext.getCurrentInstance().update("frmprincipal:mensajeGeneral");
 
         } catch (Exception ex) {
             Logger.getLogger(MbProducto.class.getName()).log(Level.SEVERE, null, ex);
@@ -157,7 +158,8 @@ public void init() {
 
             this.transaction.commit();
 
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Usuario Eliminado Correctamente", ""));
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "", "Usuario Eliminado Correctamente"));
+            RequestContext.getCurrentInstance().update("frmprincipal:mensajeGeneral");
 
         } catch (Exception ex) {
             Logger.getLogger(MbProducto.class.getName()).log(Level.SEVERE, null, ex);
@@ -170,7 +172,5 @@ public void init() {
     public void limpiar() {
         usuario = new Usuario();
     }
-    
-    
 
 }

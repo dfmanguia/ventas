@@ -17,19 +17,17 @@ import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.primefaces.context.RequestContext;
 
 @Named(value = "mbPerfil")
 @RequestScoped
 
 public class MbPerfil {
 
-    
-    
-     Session session;
+    Session session;
     Transaction transaction;
     private Perfil perfil;
     private List<Perfil> listaPerfil;
-
 
     public Perfil getPerfil() {
         return perfil;
@@ -62,7 +60,8 @@ public class MbPerfil {
 
             this.transaction.commit();
 
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Perfil Ingresado Correctamente", ""));
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "", "Perfil Ingresado Correctamente"));
+            RequestContext.getCurrentInstance().update("frmprincipal:mensajeGeneral");
         } catch (Exception e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -87,8 +86,8 @@ public class MbPerfil {
 
             this.transaction.commit();
 
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Perfil Actualizado Correctamente", ""));
-
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "", "Perfil Actualizado Correctamente"));
+            RequestContext.getCurrentInstance().update("frmprincipal:mensajeGeneral");
         } catch (Exception ex) {
             Logger.getLogger(MbPerfil.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -111,7 +110,8 @@ public class MbPerfil {
 
             this.transaction.commit();
 
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Perfil Eliminado Correctamente", ""));
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "", "Perfil Eliminado Correctamente"));
+            RequestContext.getCurrentInstance().update("frmprincipal:mensajeGeneral");
 
         } catch (Exception ex) {
             Logger.getLogger(MbPerfil.class.getName()).log(Level.SEVERE, null, ex);
@@ -124,41 +124,33 @@ public class MbPerfil {
     public void limpiar() {
         perfil = new Perfil();
     }
-    
-     public List<Perfil> getAllPerfil()
-    {
-        this.session=null;
-        this.transaction=null;
-        
-        try
-        {
-            this.session=HibernateUtil.getSessionFactory().openSession();
-            
-            DaoTPerfil daoperfil=new DaoTPerfil();
-            
-            this.transaction=this.session.beginTransaction();
-            
-            this.listaPerfil=daoperfil.getAll(this.session);
-            
+
+    public List<Perfil> getAllPerfil() {
+        this.session = null;
+        this.transaction = null;
+
+        try {
+            this.session = HibernateUtil.getSessionFactory().openSession();
+
+            DaoTPerfil daoperfil = new DaoTPerfil();
+
+            this.transaction = this.session.beginTransaction();
+
+            this.listaPerfil = daoperfil.getAll(this.session);
+
             this.transaction.commit();
-            
+
             return this.listaPerfil;
-        }
-        catch(Exception ex)
-        {
-            if(this.transaction!=null)
-            {
+        } catch (Exception ex) {
+            if (this.transaction != null) {
                 transaction.rollback();
             }
-            
+
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Error", ex.getMessage()));
-            
+
             return null;
-        }
-        finally
-        {
-            if(this.session!=null)
-            {
+        } finally {
+            if (this.session != null) {
                 this.session.close();
             }
         }
