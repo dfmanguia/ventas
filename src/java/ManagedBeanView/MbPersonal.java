@@ -6,6 +6,7 @@
 package ManagedBeanView;
 
 import Dao.DaoTPersonal;
+import Dao.Encriptar;
 import HibernateUtil.HibernateUtil;
 import Pojo.Personal;
 import java.util.logging.Level;
@@ -54,6 +55,9 @@ public Personal getSelected() {
         this.transaction = null;
 
         try {
+            
+            
+             if (Encriptar.validadorDeCedula(this.persona.getPerCi())) {
             this.session = HibernateUtil.getSessionFactory().openSession();
 
             DaoTPersonal daoTProducto = new DaoTPersonal();
@@ -66,6 +70,14 @@ public Personal getSelected() {
 
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Correcto", "Personal Ingresado correctamente"));
             RequestContext.getCurrentInstance().update("frmprincipal:mensajeGeneral");
+             }
+          else {
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "La cédula es incorrecta"));
+                RequestContext.getCurrentInstance().update("frmprincipal:mensajeGeneral");
+                System.out.println("incorrecto");
+
+            }
+        
         } catch (Exception ex) {
             Logger.getLogger(MbProducto.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -76,6 +88,7 @@ public Personal getSelected() {
         this.transaction = null;
 
         try {
+            if (Encriptar.validadorDeCedula(this.persona.getPerCi())) {
             this.session = HibernateUtil.getSessionFactory().openSession();
 
             DaoTPersonal daoTProducto = new DaoTPersonal();
@@ -88,7 +101,16 @@ public Personal getSelected() {
 
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Correcto", "Personal actualizado correctamente"));
             RequestContext.getCurrentInstance().update("frmprincipal:mensajeGeneral");
-        } catch (Exception ex) {
+       }
+          else {
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "La cédula es incorrecta"));
+                RequestContext.getCurrentInstance().update("frmprincipal:mensajeGeneral");
+                System.out.println("incorrecto");
+
+            }
+            
+            
+            } catch (Exception ex) {
             Logger.getLogger(MbProducto.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

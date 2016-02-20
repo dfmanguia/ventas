@@ -5,22 +5,13 @@ import Interface.UsuarioDao;
 import Dao.UsuarioDaoImpl;
 import HibernateUtil.HibernateUtil;
 import Pojo.Usuario;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
-import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
-
 import javax.inject.Named;
-
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.primefaces.context.RequestContext;
@@ -35,20 +26,9 @@ public class UsuarioBean {
     private Usuario usuario;
     private List<Usuario> usuarios;
 
-    /* 
-
-    public UsuarioBean() {
-        usuario=new Usuario();
-        usuarios=new ArrayList<Usuario>();
-    }*/
-
-    @PostConstruct
-    public void init() {
-        usuario = new Usuario();
-        usuarios = new ArrayList<Usuario>();
-    }
-
-    public Usuario getUsuario() {
+    
+    public Usuario getUsuario() throws Exception {
+       
         return usuario;
     }
 
@@ -118,6 +98,7 @@ public class UsuarioBean {
     }
 
     public void actualizarUsuario() {
+      
         this.session = null;
         this.transaction = null;
 

@@ -16,7 +16,7 @@ and open the template in the editor.
 
         <ui:define name="tituloPagina">Perfil</ui:define>
 
-       <ui:define name="autor">USUARIO: #{loginBean.usuario.username}</ui:define>
+        <ui:define name="autor">USUARIO: #{loginBean.usuario.username}</ui:define>
         <ui:define name="contenido">
             <h:head>
                 <title>Login con Permisos</title>
@@ -57,12 +57,20 @@ and open the template in the editor.
             <h:form id="frmprincipal">
                 <p:growl id="mensajeGeneral" showDetail="true"/>
                 <p:panel id="panel2">
+                   <p:panelGrid id="panel9" columns="1">
+                        <p:commandButton  ajax="false" action="/opcion.xhtml" value="GESTIÓN OPCIONES" ></p:commandButton>
+                        </p:panelGrid>
                     <p:panelGrid id="panel" columns="2">
                         <p:outputLabel for="idPerf" value="Id del Perfil" />
-                        <p:inputText id="idPerf" required="true" value="#{mbPerfil.selected.id}"></p:inputText>
+                        <p:inputText id="idPerf"  value="#{mbPerfil.selected.id}"></p:inputText>
 
-                        <p:outputLabel for="idOpc" value="Id de Opcion" />
-                        <p:inputText id="idOpc" required="true" value="#{mbPerfil.perfil.opcion.idOp}"></p:inputText>
+                        <p:outputLabel  value="opciones: " />
+                        <p:selectOneMenu value="#{mbPerfil.perfil.opcion.idOp}">
+                            <f:selectItems value="#{mbOpcion.allOpcion}" var="car" 
+                                           itemLabel="#{car.idOp}" itemValue="#{car.idOp}" />
+                        </p:selectOneMenu>
+
+                        
                         <p:outputLabel for="des" value="Descripcion" />
                         <p:inputText id="des" required="false" value="#{mbPerfil.perfil.descripcion}"></p:inputText>
 
@@ -88,8 +96,8 @@ and open the template in the editor.
 
                         <h:outputText value="Usuarios" />
                         <p:selectBooleanCheckbox  value="#{mbPerfil.perfil.confUsu}"/>
-                        <p:commandButton  ajax="false" action="/opcion.xhtml" value="ABRIR OPCIONES" ></p:commandButton>
-                        <p:separator/>
+                        
+                        
                     </p:panelGrid>
 
                     <p:panelGrid id="panel4" columns="3">
