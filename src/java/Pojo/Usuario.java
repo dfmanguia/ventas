@@ -18,12 +18,21 @@ public class Usuario  implements java.io.Serializable {
     public Usuario() {
         this.perfil=new Perfil();
         this.personal=new Personal();
+    
     }
     public Usuario(Perfil perfil, Personal personal, String username, String password) {
        this.perfil = perfil;
        this.personal = personal;
        this.username = username;
        this.password = password;
+    }
+
+    public Usuario(Integer id, Perfil perfil, Personal personal, String username, String password) {
+        this.id = id;
+        this.perfil = perfil;
+        this.personal = personal;
+        this.username = username;
+        this.password = password;
     }
    
     public Integer getId() {

@@ -26,9 +26,8 @@ public class UsuarioBean {
     private Usuario usuario;
     private List<Usuario> usuarios;
 
-    
     public Usuario getUsuario() throws Exception {
-       
+
         return usuario;
     }
 
@@ -73,43 +72,37 @@ public class UsuarioBean {
     public void guardarUsuario() {
         this.session = null;
         this.transaction = null;
-Boolean aux=true;
+        Boolean aux = true;
         try {
-            
+
             for (int i = 0; i < usuarios.size(); i++) {
-                if(this.usuario.getPersonal().getPerId()==usuarios.get(i).getPersonal().getPerId())
-                {
-                aux=false;
-                }   
+                if (this.usuario.getPersonal().getPerId() == usuarios.get(i).getPersonal().getPerId()) {
+                    aux = false;
+
+                }
             }
-            
-            if(aux){
-            this.session = HibernateUtil.getSessionFactory().openSession();
 
-            UsuarioDaoImpl daoTUsuario = new UsuarioDaoImpl();
+            if (aux) {
+                this.session = HibernateUtil.getSessionFactory().openSession();
 
-            this.transaction = this.session.beginTransaction();
-            this.usuario.setPassword(Encriptar.Encriptar(this.usuario.getPassword()));
+                UsuarioDaoImpl daoTUsuario = new UsuarioDaoImpl();
 
-            daoTUsuario.insert(this.session, this.usuario);
+                this.transaction = this.session.beginTransaction();
+                this.usuario.setPassword(Encriptar.Encriptar(this.usuario.getPassword()));
 
-            this.transaction.commit();
+                daoTUsuario.insert(this.session, this.usuario);
 
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "", "Usuario Ingresado Correctamente"));
-            RequestContext.getCurrentInstance().update("frmprincipal:mensajeGeneral");
+                this.transaction.commit();
+
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "", "Usuario Ingresado Correctamente"));
+                RequestContext.getCurrentInstance().update("frmprincipal:mensajeGeneral");
+            } else {
+
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "", "Personal ya tiene usuario registrado"));
+                RequestContext.getCurrentInstance().update("frmprincipal:mensajeGeneral");
+
             }
-            else
-            {
-            
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "", "Personal ya tiene usuario registrado"));
-            RequestContext.getCurrentInstance().update("frmprincipal:mensajeGeneral");
-            
-            
-            }
-        
-        
-        
-        
+
         } catch (Exception e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -120,45 +113,50 @@ Boolean aux=true;
     }
 
     public void actualizarUsuario() {
-      
+
+        
         this.session = null;
         this.transaction = null;
 
-     Boolean aux=true;
+        Boolean aux = true;
+
+        Integer a = 0;
         try {
-            
+
             for (int i = 0; i < usuarios.size(); i++) {
-                if(this.usuario.getPersonal().getPerId()==usuarios.get(i).getPersonal().getPerId())
-                {
-                aux=false;
-                }   
+                if (this.usuario.getPersonal().getPerId() == usuarios.get(i).getPersonal().getPerId()) {
+                    if (this.usuario.getId() == usuarios.get(i).getId()) {
+                        aux = true;
+                    } else {
+                        aux = false;
+                    }
+
+                }
             }
-            
-            if(aux){
-            this.session = HibernateUtil.getSessionFactory().openSession();
 
-            UsuarioDaoImpl daoTUsuario = new UsuarioDaoImpl();
+            if (aux ) {
 
-            this.transaction = this.session.beginTransaction();
-            this.usuario.setPassword(Encriptar.Encriptar(this.usuario.getPassword()));
+                this.session = HibernateUtil.getSessionFactory().openSession();
 
-            daoTUsuario.update(this.session, this.usuario);
+                UsuarioDaoImpl daoTUsuario = new UsuarioDaoImpl();
 
-            this.transaction.commit();
+                this.transaction = this.session.beginTransaction();
+                this.usuario.setPassword(Encriptar.Encriptar(this.usuario.getPassword()));
 
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "", "Usuario Actualizado Correctamente"));
-            RequestContext.getCurrentInstance().update("frmprincipal:mensajeGeneral");
+                daoTUsuario.update(this.session, this.usuario);
+
+                this.transaction.commit();
+
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "", "Usuario Actualizado Correctamente"));
+                RequestContext.getCurrentInstance().update("frmprincipal:mensajeGeneral");
+
+            } else {
+
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "", "Personal ya tiene usuario registrado"));
+                RequestContext.getCurrentInstance().update("frmprincipal:mensajeGeneral");
 
             }
-          else
-            {
-            
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "", "Personal ya tiene usuario registrado"));
-            RequestContext.getCurrentInstance().update("frmprincipal:mensajeGeneral");
-            
-            
-            }   
-            
+
         } catch (Exception ex) {
             Logger.getLogger(MbProducto.class.getName()).log(Level.SEVERE, null, ex);
         }
