@@ -19,6 +19,14 @@ public class LoginBean {
 
     public LoginBean() {
     }
+    
+    public Usuario getSelected() {
+        if (usuario == null) {
+            usuario = new Usuario();
+
+        }
+        return usuario;
+    }
 
     public void login(ActionEvent actionEvent) throws Exception {
         RequestContext context = RequestContext.getCurrentInstance();
