@@ -4,6 +4,8 @@ import Dao.Encriptar;
 import Interface.UsuarioDao;
 import Dao.UsuarioDaoImpl;
 import HibernateUtil.HibernateUtil;
+import Pojo.Perfil;
+import Pojo.Personal;
 import Pojo.Usuario;
 import java.util.List;
 import java.util.logging.Level;
@@ -112,9 +114,47 @@ public class UsuarioBean {
 
     }
 
-    public void actualizarUsuario() {
+    public void actualizarcontra() {
 
         
+
+        this.session = null;
+        this.transaction = null;
+
+        int a = 0;
+        for (int i = 0; i < usuarios.size(); i++) {
+            if (this.usuario.getId() == usuarios.get(i).getId()) {
+                a = i;
+            }
+        }
+        this.session = HibernateUtil.getSessionFactory().openSession();
+
+                UsuarioDaoImpl daoTUsuario = new UsuarioDaoImpl();
+
+                this.transaction = this.session.beginTransaction();
+                
+        this.usuario.setUsername(usuarios.get(a).getUsername());
+        this.usuario.setPerfil(new Perfil(usuarios.get(a).getPerfil().getId()));
+        this.usuario.setPersonal(new Personal(usuarios.get(a).getPersonal().getPerId()));
+        this.usuario.setPassword(Encriptar.Encriptar(this.usuario.getPassword()));
+System.out.println(""+this.usuario.getUsername()+"sa"+this.usuario.getPerfil().getId()+"per;"+this.usuario.getPersonal().getPerId());
+System.out.println("holdsaaa" + this.usuario.getId() + " sdffsdsfsfd: " + this.usuario.getPassword());
+        try {
+            daoTUsuario.update(this.session, this.usuario);
+        } catch (Exception ex) {
+            Logger.getLogger(UsuarioBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+                this.transaction.commit();
+
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "", "Usuario Actualizado Correctamente"));
+                RequestContext.getCurrentInstance().update("frmprincipal:mensajeGeneral");
+        
+    }
+
+    public void actualizarUsuario() {
+
+        System.out.println("holdsaaa" + this.usuario.getId() + " " + this.usuario.getPassword());
         this.session = null;
         this.transaction = null;
 
@@ -134,13 +174,14 @@ public class UsuarioBean {
                 }
             }
 
-            if (aux ) {
+            if (aux) {
 
                 this.session = HibernateUtil.getSessionFactory().openSession();
 
                 UsuarioDaoImpl daoTUsuario = new UsuarioDaoImpl();
 
                 this.transaction = this.session.beginTransaction();
+               
                 this.usuario.setPassword(Encriptar.Encriptar(this.usuario.getPassword()));
 
                 daoTUsuario.update(this.session, this.usuario);

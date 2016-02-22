@@ -28,7 +28,12 @@ public class Perfil  implements java.io.Serializable {
     public Perfil() {
         this.opcion=new Opcion();
     }
-	
+
+    public Perfil(Integer id) {
+        this.id = id;
+    }
+
+   	
     public Perfil(Opcion opcion) {
         this.opcion = opcion;
     }
@@ -53,6 +58,7 @@ public class Perfil  implements java.io.Serializable {
     
     public void setId(Integer id) {
         this.id = id;
+        System.out.println("DEBUG Perfil "+this.id+this.getDescripcion());
     }
     public Opcion getOpcion() {
         return this.opcion;

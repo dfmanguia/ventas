@@ -41,6 +41,7 @@ public class UsuarioDaoImpl implements UsuarioDao {
 
     @Override
     public boolean update(Session session, Usuario usuario) throws Exception {
+      
         session.update(usuario);
         return true;
     }

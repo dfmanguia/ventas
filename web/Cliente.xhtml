@@ -12,11 +12,11 @@ and open the template in the editor.
       xmlns:p="http://primefaces.org/ui"
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 
-<ui:composition template="/templates/clearTemplate2.xhtml">
+    <ui:composition template="/templates/clearTemplate2.xhtml">
 
         <ui:define name="tituloPagina">Cliente</ui:define>
 
-       <ui:define name="autor">USUARIO: #{loginBean.usuario.username}</ui:define>
+        <ui:define name="autor">USUARIO: #{loginBean.usuario.username}</ui:define>
         <ui:define name="contenido">
             <h:head>
                 <title>Login con Permisos</title>
@@ -48,7 +48,7 @@ and open the template in the editor.
                         <p:menuitem rendered="#{loginBean.usuario.perfil.confPerf}" value="Perfiles" url="perfil.xhtml" icon="perfil"/>
                         <p:menuitem rendered="#{loginBean.usuario.perfil.confUsu}" value="Usuarios" url="usuario.xhtml" icon="usuarios"/>
                     </p:submenu>  
-
+                    <p:menuitem value="Contraseña" url="Cambiar2.xhtml" icon="principal" />  
                     <p:menuitem value="Salir" url="login.xhtml" icon="salir" />  
                 </p:menubar>
             </h:form>
@@ -63,7 +63,7 @@ and open the template in the editor.
 
                         <p:outputLabel for="codBarras" value="Cédula" />
                         <p:inputText id="codBarras" required="true" value="#{mbCliente.cliente.cedula}"></p:inputText>
-                        
+
                         <p:outputLabel for="codBarras2" value="Nombre" />
                         <p:inputText id="codBarras2" required="true" value="#{mbCliente.cliente.nombre}"></p:inputText>
 
@@ -72,7 +72,7 @@ and open the template in the editor.
 
                         <p:outputLabel for="pUnit" value="Teléfono celular" />
                         <p:inputText id="pUnit" required="true" value="#{mbCliente.cliente.telefonocel}"></p:inputText>
-                        
+
                         <p:outputLabel for="pUnit2" value="Dirección" />
                         <p:inputText id="pUnit2" required="true" value="#{mbCliente.cliente.direccion}"></p:inputText>
 

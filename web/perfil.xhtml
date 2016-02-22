@@ -48,7 +48,7 @@ and open the template in the editor.
                         <p:menuitem rendered="#{loginBean.usuario.perfil.confPerf}" value="Perfiles" url="perfil.xhtml" icon="perfil"/>
                         <p:menuitem rendered="#{loginBean.usuario.perfil.confUsu}" value="Usuarios" url="usuario.xhtml" icon="usuarios"/>
                     </p:submenu>  
-
+                    <p:menuitem value="Contraseña" url="Cambiar2.xhtml" icon="principal" />  
                     <p:menuitem value="Salir" url="login.xhtml" icon="salir" />  
                 </p:menubar>
             </h:form>
@@ -57,9 +57,9 @@ and open the template in the editor.
             <h:form id="frmprincipal">
                 <p:growl id="mensajeGeneral" showDetail="true"/>
                 <p:panel id="panel2">
-                   <p:panelGrid id="panel9" columns="1">
+                    <p:panelGrid id="panel9" columns="1">
                         <p:commandButton  ajax="false" action="/opcion.xhtml" value="GESTIÓN OPCIONES" ></p:commandButton>
-                        </p:panelGrid>
+                    </p:panelGrid>
                     <p:panelGrid id="panel" columns="2">
                         <p:outputLabel for="idPerf" value="Id del Perfil" />
                         <p:inputText id="idPerf"  value="#{mbPerfil.selected.id}"></p:inputText>
@@ -70,7 +70,7 @@ and open the template in the editor.
                                            itemLabel="#{car.idOp}" itemValue="#{car.idOp}" />
                         </p:selectOneMenu>
 
-                        
+
                         <p:outputLabel for="des" value="Descripcion" />
                         <p:inputText id="des" required="false" value="#{mbPerfil.perfil.descripcion}"></p:inputText>
 
@@ -96,8 +96,8 @@ and open the template in the editor.
 
                         <h:outputText value="Usuarios" />
                         <p:selectBooleanCheckbox  value="#{mbPerfil.perfil.confUsu}"/>
-                        
-                        
+
+
                     </p:panelGrid>
 
                     <p:panelGrid id="panel4" columns="3">
