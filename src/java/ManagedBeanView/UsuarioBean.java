@@ -100,7 +100,7 @@ public class UsuarioBean {
                 RequestContext.getCurrentInstance().update("frmprincipal:mensajeGeneral");
             } else {
 
-                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "", "Personal ya tiene usuario registrado"));
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "", "Personal ya tiene usuario registrado"));
                 RequestContext.getCurrentInstance().update("frmprincipal:mensajeGeneral");
 
             }

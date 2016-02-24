@@ -69,6 +69,8 @@ public class MbProducto {
         } catch (Exception ex) {
             Logger.getLogger(MbProducto.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        limpiar();
     }
 
     public void actualizarProducto() {
@@ -91,6 +93,7 @@ public class MbProducto {
         } catch (Exception ex) {
             Logger.getLogger(MbProducto.class.getName()).log(Level.SEVERE, null, ex);
         }
+        limpiar();
     }
 
     public void eliminarProducto() {
@@ -113,5 +116,10 @@ public class MbProducto {
         } catch (Exception ex) {
             Logger.getLogger(MbProducto.class.getName()).log(Level.SEVERE, null, ex);
         }
+        limpiar();
+    }
+    
+    public void limpiar() {
+         producto= new Tproducto();
     }
 }

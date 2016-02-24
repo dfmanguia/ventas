@@ -81,6 +81,7 @@ public Personal getSelected() {
         } catch (Exception ex) {
             Logger.getLogger(MbProducto.class.getName()).log(Level.SEVERE, null, ex);
         }
+          limpiar();
     }
     
     public void actualizarPersonal() {
@@ -113,6 +114,7 @@ public Personal getSelected() {
             } catch (Exception ex) {
             Logger.getLogger(MbProducto.class.getName()).log(Level.SEVERE, null, ex);
         }
+          limpiar();
     }
      
       public void eliminarPersonal() {
@@ -135,6 +137,7 @@ public Personal getSelected() {
         } catch (Exception ex) {
             Logger.getLogger(MbProducto.class.getName()).log(Level.SEVERE, null, ex);
         }
+          limpiar();
     }
       
       public List<Personal> getAllPer()
@@ -174,6 +177,10 @@ public Personal getSelected() {
                 this.session.close();
             }
         }
+    }
+      
+      public void limpiar() {
+         persona= new Personal();
     }
 }
 
