@@ -147,8 +147,10 @@ System.out.println("holdsaaa" + this.usuario.getId() + " sdffsdsfsfd: " + this.u
 
                 this.transaction.commit();
 
-                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "", "Usuario Actualizado Correctamente"));
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "", "Contraseña actualizada correctamente"));
                 RequestContext.getCurrentInstance().update("frmprincipal:mensajeGeneral");
+                
+        limpiar();
         
     }
 
